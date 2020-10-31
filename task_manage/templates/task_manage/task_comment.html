@@ -1,0 +1,46 @@
+{% extends 'task_manage/base.html' %}
+{% block content %}
+<div class="container" >
+    <div class="text-center">
+        <h1> Task Details: </h1>
+    </div>
+    <div class="row">
+
+        <div class="col-6">
+        <h3>Add comment here:</h3><br>
+            <form action="" method="POST">
+                {%csrf_token%}
+                {% for form in form%}
+                    {{form.label}}
+                    {{form}}<br>
+                {%endfor%}
+        
+                <button type="submit" class="btn btn-info"> Add Comment </button>
+            </form>
+        </div>
+        <div class="col-6">
+        <h3>Task Details:</h3><br>
+                <h6><b> Task Id: </b>{{task.task_id}}</h6> 
+                <h6><b> Task Title: </b>{{task.task_title}}</h6> 
+                <h6><b> Task Description: </b>{{task.task_description}}</h6> 
+                <h6><b> Task Reporter: </b>{{task.task_reporter}}</h6> 
+                <h6><b> Task Assignee: </b>{{task.task_assignee}}</h6> 
+                <h6><b> Task Created At: </b>{{task.task_created_at}}</h6> 
+                <h6><b> Task priority: </b>{{task.task_priority}}</h6> 
+                <h6><b> Task Status: </b>{{task.task_status}}</h6> 
+                <h6><b> Task Deadline Date: </b>{{task.task_deadline_date}}</h6> 
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <h3>Comments:</h3><br>
+            {%for comment in task_comment%}
+                <h6><b>Task:  {{comment.task}}</b></h6>
+                <h6><b> Content: </b> {{comment.content}}</h6>
+                <h6><b> By: </b>{{comment.user}} @ {{comment.posted_at}}  </h6><br>
+            {%endfor%}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

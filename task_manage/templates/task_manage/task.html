@@ -1,0 +1,99 @@
+{% extends 'task_manage/base.html' %}
+{% block content %}
+<div class="container" >
+    <div class="text-center">
+        <h1> Task </h1>
+    </div>
+    <div class="row">
+     <div class="col-6">
+        <h3>Add Task here:</h3><br>
+            <form action="" method="POST">
+                {%csrf_token%}
+                {% for form in form%}
+                    {{form.label}}
+                    {{form}}<br>
+                {%endfor%}
+        
+                <button type="submit" class="btn btn-info"> Add Task </button>
+            </form>
+    </div>
+    <div class="row-6">
+        {% if "update" not in request.path %}
+        <h3> Tasks: </h3>
+    
+        <table border="1">
+
+            <tr>
+                <th> Task_id </th>
+                <th> Task_Project </th>
+                <th> Task_title</th>
+                <th> Task_number </th>
+                <th> Task_description</th>
+                <th> Task_reporter</th>
+                <th> Task_assignee</th>
+                <th> task_created_at</th>
+                <th> task_updated_at</th>
+                <th> task_deadline_date</th>
+                <th> task_priority</th>
+                <th> Task_status</th>
+                <th> UPDATE</th>
+
+            </tr>
+        </table>
+         {%endif %}
+        <table border="1">  
+        {% for task in tasks %}
+        
+        <tr>
+            <td >
+                <h6><a href="{%url 'task_comment' task.id %}">{{task.task_id}}</a></h6>
+            </td>
+            <td >
+                <h6>{{task.task_project}}</h6>
+            </td>
+            <td>
+                <h6>{{task.task_title}}</h6>
+            </td>
+            <td>
+                <h6>{{task.task_number}}</h6>
+            </td>
+            <td>
+                <h6>{{task.task_description}}</h6>
+            </td>
+            <td>
+                <h6>{{task.task_reporter}}</h6>
+            </td>
+            <td>
+                <h6>{{task.task_assignee}}</h6>
+            </td>
+            <td>
+                <h6> {{task.task_created_at}}</h6>
+            </td>
+            <td>
+                <h6>{{task.task_updated_at}}</h6>
+            </td>
+            <td>
+                <h6>{{task.task_deadline_date}}</h6>
+            </td>
+            <td>
+                <h6>{{task.task_priority}}</h6>
+            </td>
+            <td>
+                <h6>{{task.task_status}}</h6>
+            </td>
+            <td>
+                 <a class="btn btn-sm btn-info" href="{% url 'update_task' task.id %}">Update</a>
+            </td>
+        </tr>
+          
+        {% endfor%}
+    </table>  
+        <!-- {% for task in tasks%}
+          <a href="{%url 'task_comment' task.id %}">  * {{task.task_id}}<br> </a>
+        {%endfor%} -->
+    </div>
+
+    </div>
+</div>
+
+{% endblock %}

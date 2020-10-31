@@ -1,0 +1,55 @@
+{% extends 'task_manage/base.html' %}
+
+{% block content %}
+<div class="container" >
+    <div class="text-center">
+        <h1> PROJECTS </h1>
+    </div>
+    <div class="row">
+        <div class="col-6">
+        <h2>Create Project here</h2><br>
+            <form action="" method="post">
+                {% csrf_token %}
+                {% for form in form%}
+                    {{form.label}}:
+                    {{form}}<br><br>
+                {%endfor%}
+                <button type="submit" class="btn btn-info" > Create Project </button>
+            </form>
+        </div>
+    </div><br><br>
+    <h3> Projects: </h3><br>
+    <div class = "row">
+        <table border="1">
+
+            <tr>
+                <th> Project name </th>
+                <th> Project Key</th>
+
+            </tr>
+        </table>
+        {% for project in project %}
+        <table border="1">
+
+            <tr>
+                <td>
+                    <h6><a href="{%url 'task' project.id %}">{{project.project_name}}</a></h6>
+                </td>
+                <td>
+                    <h6>{{project.project_key}}</h6>
+                </td>
+
+            </tr>
+        </table>
+
+
+        {% endfor%}
+
+        <!-- {% for project in project%}
+        <div class="col-6"><a href="{%url 'task' project.id %}">{{project.project_name}}</a></div><br>
+        {%endfor%} -->
+    </div>
+
+</div>
+
+{% endblock %}
